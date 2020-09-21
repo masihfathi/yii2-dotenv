@@ -32,5 +32,9 @@
         "psr-4": {
             "tests\\": "tests/"
         }
-    }
+    },
+    "asset-vcs-driver-options": {
+        "github-no-api": true
+    },
+    "asset-pattern-skip-version": "(-build|-patch)"
 }
