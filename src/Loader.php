@@ -1,6 +1,6 @@
 <?php
 
-namespace yiithings\dotenv;
+namespace masihfathi\dotenv;
 
 use Dotenv\Dotenv;
 use Yii;
@@ -16,7 +16,7 @@ class Loader extends Component
      * @param bool   $overload
      * @return bool
      */
-    public static function load($path = '', $file = '.env', $overload = false)
+    public static function load(string $path = '', string $file = '.env', bool $overload = false) : bool
     {
         /*
          * Find Composer base directory.
@@ -67,15 +67,9 @@ class Loader extends Component
         if (! file_exists(rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $file)) {
             return false;
         }
-        $dotEnv = new DotEnv($path, $file);
-        /*
-         * Overload or load method by environment variable COMPOSER_DOTENV_OVERLOAD.
-         */
-        if ($overload) {
-            $dotEnv->overload();
-        } else {
-            $dotEnv->load();
-        }
+        $dotEnv = Dotenv::createImmutable($path,$file);
+
+        $dotEnv->load();
 
         return true;
     }

@@ -1,6 +1,6 @@
 <?php
 
-use yiithings\dotenv\Loader;
+use masihfathi\dotenv\Loader;
 
 class LoaderTest extends PHPUnit_Framework_TestCase
 {
@@ -9,6 +9,6 @@ class LoaderTest extends PHPUnit_Framework_TestCase
         require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
         Yii::setAlias('@app', __DIR__);
         $this->assertTrue(Loader::load());
-        $this->assertEquals('admin', getenv('YII2_DOTENV_USER'));
+        $this->assertEquals('admin', $_ENV['YII2_DOTENV_USER']);
     }
 }

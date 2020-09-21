@@ -4,7 +4,7 @@
  *
  * Autoload .env at Composer autoloader.
  */
-use yiithings\dotenv\Loader;
+use masihfathi\dotenv\Loader;
 
 /*
  * Prevent duplicate definition of the same name function.
@@ -17,7 +17,7 @@ if ( ! function_exists('env')) {
      * @param bool   $default
      * @return array|bool|false|string
      */
-    function env($name, $default = false)
+    function env(string $name, bool $default = false)
     {
         static $loaded = null;
         if ($loaded === null) {
@@ -32,16 +32,15 @@ if ( ! function_exists('env')) {
             if (defined('DISABLE_DOTENV_LOAD') && DISABLE_DOTENV_LOAD) {
                 $loaded = false;
             } else {
-                Loader::load(
+                $loaded = Loader::load(
                     defined('DOTENV_PATH') ? DOTENV_PATH : '',
-                    defined('DOTENV_FILE') ? DOTENV_FILE : '',
-                    defined('DOTENV_OVERLOAD') ? DOTENV_OVERLOAD : false
+                    defined('DOTENV_FILE') ? DOTENV_FILE : ''
                 );
-                $loaded = true;
             }
         }
-        $value = getenv($name);
-
-        return $value ? $value : $default;
+        if($loaded) {
+            $value = $_ENV[$name];
+        }
+        return isset($value) ? $value : $default;
     }
 }

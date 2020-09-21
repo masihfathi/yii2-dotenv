@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class AutoloadTest extends TestCase
 {
+    // test autoload env function
     public function testDefault()
     {
         define('DOTENV_PATH', __DIR__);
